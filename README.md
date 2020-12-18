@@ -23,5 +23,5 @@ jest [folderName]/test.js --watch
 eg.
 
 ```bash
-jest [folderName]/test.js --watch
+jest fib/test.js --watch
 ```
