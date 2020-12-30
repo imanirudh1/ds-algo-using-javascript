@@ -8,15 +8,27 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {
+function memoize(fn) {
+  const cache = {}
+  return function (...args) {
+    if (cache[args]) {
+      return cache[args]
+    }
+    const result = fn.apply(this, args)
+    cache[args] = result
+    return result
+  }
+}
+
+function slowFib(n) {
   //fibonacci series using tabulation
-  //   const table = Array(n + 1).fill(0)
-  //   table[1] = 1
-  //   for (let i = 0; i <= n; i++) {
-  //     table[i + 1] += table[i]
-  //     table[i + 2] += table[i]
-  //   }
-  //   return table[n]
+  // const table = Array(n + 1).fill(0)
+  // table[1] = 1
+  // for (let i = 0; i <= n; i++) {
+  //   table[i + 1] += table[i]
+  //   table[i + 2] += table[i]
+  // }
+  // return table[n]
 
   //using recurrsion
   if (n < 2) {
@@ -24,5 +36,7 @@ function fib(n) {
   }
   return fib(n - 1) + fib(n - 2)
 }
+
+const fib = memoize(slowFib)
 
 module.exports = fib
